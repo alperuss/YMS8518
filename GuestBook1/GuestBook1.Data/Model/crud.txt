@@ -1,0 +1,5 @@
+﻿add-migration Initial -Context "DataContext" -StartupProject "GuestBook1" -Project "GuestBook1.Data"
+
+update-database -Context "DataContext" -StartupProject "GuestBook1" -Project "GuestBook1.Data"
+
+remove-migration -Context "DataContext" -StartupProject "GuestBook1" -Project "GuestBook1.Data"
