@@ -25,6 +25,10 @@ namespace GuestBook.Controllers
         }
         public IActionResult Manage()
         {
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+                return RedirectToAction("AdminDashboard", "GuestBook");
+            }
             return View();
         }
 
@@ -47,12 +51,14 @@ namespace GuestBook.Controllers
                 return Unauthorized();
             }
 
-            if (guestBookLoginDto.Username=="admin" && guestBookLoginDto.Password=="12345678")
-            {
-
-            }
+            
 
             return new JsonResult("ok");
+        }
+        public IActionResult LogoutAction()
+        {
+            HttpContext.Session.Remove("userId");
+            return RedirectToAction("Manage","GuestBook");
         }
         public IActionResult AdminDashboard()
         {
