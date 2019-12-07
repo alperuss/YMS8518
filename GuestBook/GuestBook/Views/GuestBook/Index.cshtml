@@ -3,7 +3,7 @@
 @{ 
     Layout = "_Layout";
 }
-<h1>Ziyaretçi Defteri</h1>
+<h1>Ziyaretçi Defteri (<a href="@Url.Action("Manage","GuestBook")">Yönetim</a>)</h1>
 <div>
     @{ 
         foreach (var guestNote in Model)
@@ -26,10 +26,4 @@
         <input type="button" value="Gönder" onclick="GuestBook.Page.GuestBook.Index.Send();"/>
 
     </form>
-</div>
-<div id="GuestBook-Index-Sending" style="display:none;">
-    <h3>Gönderiliyor...</h3>
-</div>
-<div id="GuestBook-Index-Sent" style="display:none;">
-    <h3>Teşekkür ederiz.</h3>
 </div>

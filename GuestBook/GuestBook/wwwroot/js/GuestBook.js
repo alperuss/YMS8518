@@ -78,28 +78,27 @@
                     }
                     
                     var data = {
-                        Username: username;
-                        Password: password;
+                        Username: username,
+                        Password: password
                     }
                     var json = JSON.stringify(data);
                     $.ajax({
                         type: "POST",
                         url: "/GuestBook/LoginAction",
                         data: json,
-                        success: GuestBook.Page.GuestBook.Manage._Login_Callback,
+                        success: GuestBook.Page.GuestBook.Manage.Login_Callback,
                         error: GuestBook.Page.GuestBook.Manage.Login_Callback_Error,
                         dataType: "json",
                         contentType: "application/json;charset=utf-8"
                     });
                 },
                 Login_Callback: function (result) {
-                    $("#GuestBook-Manage-");
-                    console.log(result);
+                    window.location.href = "/GuestBook/AdminDashboard";
+                   
                 },
                 Login_Callback_Error: function (result) {
                     alert("Kullanıcı adı veya şifre hatalı.");
-                    $("#");
-                    console.log(result);
+                    
                 }
             }
         }

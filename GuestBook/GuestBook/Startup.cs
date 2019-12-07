@@ -28,12 +28,12 @@ namespace GuestBook
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddDbContext<DataContext>
                 (a => a.UseSqlServer("Server=localhost;Database=YMS8518_GuestBook;User Id=sa;Password=123;"));
+            services.AddSession();
 
 
 
@@ -54,7 +54,7 @@ namespace GuestBook
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

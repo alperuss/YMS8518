@@ -39,6 +39,7 @@ namespace GuestBook.Controllers
             if (user !=null)
             {
                 HttpContext.Session.SetInt32("userId", user.Id);
+                return new JsonResult("OK");
 
             }
             else
@@ -52,6 +53,18 @@ namespace GuestBook.Controllers
             }
 
             return new JsonResult("ok");
+        }
+        public IActionResult AdminDashboard()
+        {
+            if (HttpContext.Session.GetInt32("userId")!=null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Manage","GuestBook");
+            }
+            return View();
         }
 
         public IActionResult SendAction([FromBody]GuestBookSendActionDto guestBookSendActionDto)

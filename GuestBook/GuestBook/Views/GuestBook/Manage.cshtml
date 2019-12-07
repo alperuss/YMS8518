@@ -1,13 +1,11 @@
-﻿<div>
+﻿@{ 
+    Layout = "_Layout";
+}
+<div>
     <input type="text" id="Username" placeholder="Kullanıcı Adı" />
     <br />
     <input type="password" id="Password" placeholder="Şifre" />
     <br />
     <input type="button" value="Giriş Yap" onclick="GuestBook.Page.GuestBook.Manage.Login()"/>
 </div>
-<div id="GuestBook-Manage-" style="display:none;">
-    <h3>Gönderiliyor...</h3>
-</div>
-<div id="GuestBook-Index-" style="display:none;">
-    <h3>Teşekkür ederiz.</h3>
-</div>
+
