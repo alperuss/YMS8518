@@ -23,6 +23,7 @@ namespace GuestBook.Controllers
             List<GuestNote> guestNotes = _dataContext.GuestNotes.ToList();
             return View(guestNotes);
         }
+
         public IActionResult Manage()
         {
             if (HttpContext.Session.GetInt32("userId") != null)
