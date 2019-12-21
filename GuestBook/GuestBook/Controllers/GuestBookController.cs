@@ -12,18 +12,19 @@ namespace GuestBook.Controllers
 {
     public class GuestBookController : Controller
     {
-        private readonly DataContext _dataContext;
-        public GuestBookController(DataContext dataContext)
+        private readonly Data.Interfaces.IGuestNoteRepository _guestNoteRepository;
+        private readonly Data.Interfaces.IUserRepository _userRepository;
+        public GuestBookController(Data.Interfaces.IGuestNoteRepository guestNoteRepository,Data.Interfaces.IUserRepository userRepository)
         {
-            _dataContext = dataContext;
+            _guestNoteRepository = guestNoteRepository;
+            _userRepository = userRepository;
         }
 
         public IActionResult Index()
         {
-            List<GuestNote> guestNotes = _dataContext.GuestNotes.ToList();
+            List<GuestNote> guestNotes = _guestNoteRepository.List();
             return View(guestNotes);
         }
-
         public IActionResult Manage()
         {
             if (HttpContext.Session.GetInt32("userId") != null)
@@ -39,7 +40,7 @@ namespace GuestBook.Controllers
             {
                 return BadRequest("Bad Boy");
             }
-            User user = _dataContext.Users.SingleOrDefault(a =>
+            User user = _userRepository.List().SingleOrDefault(a =>
               a.Username == guestBookLoginDto.Username && a.Password == guestBookLoginDto.Password);
             if (user !=null)
             {
@@ -87,8 +88,8 @@ namespace GuestBook.Controllers
             guestNote.Message = guestBookSendActionDto.Message;
             guestNote.CreateDate = DateTime.Now;
 
-            _dataContext.GuestNotes.Add(guestNote);
-            _dataContext.SaveChanges();
+            _guestNoteRepository.Insert(guestNote);
+           
             return new JsonResult("ok");
         }
     }

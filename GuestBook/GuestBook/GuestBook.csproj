@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GuestBook.Data\GuestBook.Data.csproj" />
+    <ProjectReference Include="..\GuestBook.Service\GuestBook.Service.csproj" />
   </ItemGroup>
 
 </Project>
