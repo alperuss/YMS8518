@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace GenericRepository
+namespace GenericRepositoryDeneme
 {
     public class Startup
     {
@@ -26,7 +26,7 @@ namespace GenericRepository
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<DataContext>(a => a.UseSqlServer("Server=localhost;Database=YMS8518_Generic;User Id=sa;Password=123;"));
+            services.AddDbContext<DataContext>(a => a.UseSqlServer("Server=localhost;User Id=sa;Password=123;Database=Yms8518_GenericDeneme"));
             services.AddScoped<Interfaces.IUnitOfWork, Services.UnitOfWork>();
         }
 

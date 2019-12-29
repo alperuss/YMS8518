@@ -11,16 +11,23 @@ namespace GenericRepository.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        private readonly Interfaces.IBookRepositorycs _bookRepositorycs;
-        
-        public BookController(Interfaces.IBookRepositorycs bookRepositorycs)
+        private readonly Interfaces.IUnitOfWork _unitOfWork;
+        public BookController(Interfaces.IUnitOfWork unitOfWork)
         {
-            _bookRepositorycs = bookRepositorycs;       
+            _unitOfWork = unitOfWork;
         }
         [HttpGet]
         public IActionResult GetAll()
         {
-            return new JsonResult(_bookRepositorycs.GetAll());
+            var books = _unitOfWork.BookRepositorycs.GetAll();
+            return new JsonResult(books);
+
+        }
+        [HttpPost]
+        public IActionResult Insert([FromBody]Models.Book book)
+        {
+            _unitOfWork.BookRepositorycs.Insert(book);
+            _unitOfWork.Complete();
+            return new JsonResult(book);
         }
     }
-}
