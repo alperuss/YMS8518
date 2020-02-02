@@ -1,0 +1,40 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    function myFunction() {
+
+        var title = $("#title").val();
+        var content = $("#content").val();
+
+        var data = {
+            Title: title,
+            Content: content
+        };
+
+        var json = JSON.stringify(data);
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/EntryInputAction",
+            data: json,
+            success: Send_Callback,
+            error: Send_Callback_Error,
+            dataType: "json",
+            contentType: "application/json ; charset = utf-8"
+        });
+    }
+
+    function Send_Callback() {
+        window.location.href = "/Home/Index";
+    }
+
+    function Send_Callback_Error() {
+       
+    }
+
+</script>
+
+<div>
+    <input type="text" id="title" placeholder="Title" /><br />
+    <input type="text" id="content" placeholder="Content" /><br />
+    <input type="button" value="Giriş Yap" onclick="myFunction()" />
+</div>

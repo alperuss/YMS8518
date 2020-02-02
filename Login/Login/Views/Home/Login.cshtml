@@ -1,0 +1,40 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    function myFunction() {
+
+        var name = $("#Username").val();
+        var password = $("#Password").val();
+
+        var data = {
+            Username: name,
+            Password: password
+        };
+
+        var json = JSON.stringify(data);
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/LoginAction",
+            data: json,
+            success: Send_Callback,
+            error: Send_Callback_Error,
+            dataType: "json",
+            contentType: "application/json ; charset = utf-8"
+        }); 
+    }
+
+    function Send_Callback() {
+        window.location.href = "InsertEntry";
+    }
+
+    function Send_Callback_Error() {
+        alert("Kullanıcı adı veya şifre hatalı");
+    }
+           
+</script>
+
+<div>
+    <input type="text" id="Username" placeholder="Kullanıcı Adı" /><br />
+    <input type="password" id="Password" placeholder="Şifre" /><br />
+    <input type="button" value="Giriş Yap" onclick="myFunction()" />
+</div>

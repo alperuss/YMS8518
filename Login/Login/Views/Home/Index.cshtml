@@ -1,0 +1,10 @@
+﻿@model List<Login.Models.Entry>
+
+
+    @{
+        foreach (var entry in Model)
+        {
+            <div>@entry.Title - @entry.Content</div>
+            <br />
+        }
+    }
