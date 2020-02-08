@@ -1,0 +1,166 @@
+using System;
+
+namespace Vekiller
+{
+    class Program
+    {
+        public delegate void TestDelegate(int x, int y);
+
+        public static void Topla(int x,int y)
+        {
+            Console.WriteLine(x + y);
+        }
+        public static void Cikart(int x,int y)
+        {
+            Console.WriteLine(x - y);
+        }
+        public static void Carp(int x,int y)
+        {
+            Console.WriteLine(x * y);
+        }
+        public static void Bol(int x, int y)
+        {
+            Console.WriteLine(x / y);
+        }
+
+        static void Main(string[] args)
+        {
+            TestDelegate test = Topla;
+            test(10, 5);
+
+            test = Cikart;
+            test(10,5);
+
+            test = Bol;
+            test(10,5);
+
+            test = Carp;
+            test(10,5);
+            Console.ReadLine();
+            
+        }
+    }
+}
+------------------------------------------------------------------------------------------------
+using System;
+
+namespace Vekiller
+{
+    class Program
+    {
+        public static int Carp(int x,int y)
+        {
+            return x * y;
+        }
+        public static int Bol(int x, int y)
+        {
+            return x / y;
+        }
+
+        static void Main(string[] args)
+        {
+            Func<int, int, int> testDelegate = Bol;
+            int cikti = testDelegate(2,3);
+            Console.WriteLine(cikti);
+            testDelegate = Carp;
+            cikti = testDelegate(4,5);
+            
+
+            Console.WriteLine(cikti);
+            Console.ReadLine();
+            
+        }
+    }
+}
+-----------------------------------------------------------------------------------------
+using System;
+
+namespace Vekiller
+{
+    class Program
+    {
+        public static string Concat(string ilk,string son)
+        {
+            return ilk + son;
+        }
+
+        static void Main(string[] args)
+        {
+
+
+            Func<string, string, string> testDelegate;
+            testDelegate = delegate (string x, string y)
+              {
+                  return y + x;
+              };
+            string cikti = testDelegate("bilge","adam");
+            Console.WriteLine(cikti);
+            testDelegate = Concat;
+            cikti = testDelegate("bilge","adam");
+            Console.WriteLine(cikti);
+          
+            Console.ReadLine();
+            
+        }
+    }
+}
+--------------------------------------------------------------------------------------
+using System;
+
+namespace Vekiller
+{
+    class Program
+    {
+        public static void Concat(string ilk,string son)
+        {
+           Console.WriteLine(ilk + son);
+        }
+
+        static void Main(string[] args)
+        {
+
+            Action<string, string> testDelegate2 = Concat;//public static void olduðu zaman
+            testDelegate2("x","y");
+
+            Func<string, string, string> testDelegate;
+            testDelegate = delegate (string x, string y){ return y + x; };
+
+            string cikti = testDelegate("bilge","adam");
+            Console.WriteLine(cikti);
+            testDelegate = Concat;//public static string Concat-olduðu zaman
+            cikti = testDelegate("bilge","adam");
+            Console.WriteLine(cikti);
+          
+            Console.ReadLine();
+            
+        }
+    }
+}
+-----------------------------------------------------------------------------------------------
+using System;
+
+namespace Vekiller
+{
+    class Program
+    {
+        public static string ConcattedString = string.Empty;
+        public static void Concat(string ilk,string son)
+        {
+            ConcattedString = ilk + son;
+           Console.WriteLine(ilk + son);
+        }
+
+        static void Main(string[] args)
+        {
+
+            Action<string, string> testDelegate2 = Concat;
+            testDelegate2("x","y");
+
+            
+            Console.WriteLine("Singleton'dan gelen nesne: "+ ConcattedString);
+          
+            Console.ReadLine();
+            
+        }
+    }
+}
